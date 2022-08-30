@@ -1,24 +1,24 @@
 var d = document;
 
 d.querySelector("#access_acount").addEventListener("click",async ()=>{
-    if(typeof ethereum != undefined ){
-        await ethereum.request({method:"eth_requestAccounts"});
-        d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+ethereum.selectedAddress;
+    if(typeof okex != undefined ){
+        await okex.request({method:"eth_requestAccounts"});
+        d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+okex.selectedAddress;
     }
 });
 
-ethereum.on("accountsChanged",(acc)=>{
-    d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+ethereum.selectedAddress;
+okex.on("accountsChanged",(acc)=>{
+    d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+okex.selectedAddress;
 });
 
 d.querySelector("#donate_btn").addEventListener("click",()=>{
     let price = d.querySelector("#donate_input").value;
     if(price==""){setAlert("โปรดกรอกจำนวนให้ถูกต้อง","danger");return;}
-    ethereum.request({
+    okex.request({
         method:"eth_sendTransaction",
         params: [{
-            from:ethereum.selectedAddress,
-            to:"0xFc102e94230788513F71579B4B863d8fF89BeB25",
+            from:okex.selectedAddress,
+            to:"0x89b07dbC759eEF14616035b4dAe17861F0CE8CF5",
             value:convertToWei(Number(price))// 1eth = 10^18 wei
         }]
     })
