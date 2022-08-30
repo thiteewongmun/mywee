@@ -14,7 +14,7 @@ Ethereum.on("accountsChanged",(acc)=>{
 d.querySelector("#donate_btn").addEventListener("click",()=>{
     let price = d.querySelector("#donate_input").value;
     if(price==""){setAlert("โปรดกรอกจำนวนให้ถูกต้อง","danger");return;}
-    okex.request({
+  Ethereum .request({
         method:"eth_sendTransaction",
         params: [{
             from:Ethereum.selectedAddress,
