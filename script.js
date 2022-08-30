@@ -1,14 +1,14 @@
 var d = document;
 
 d.querySelector("#access_acount").addEventListener("click",async ()=>{
-    if(typeof okex != undefined ){
-        await okex.request({method:"eth_requestAccounts"});
-        d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+okex.selectedAddress;
+    if(typeof Ethereum != undefined ){
+        await Ethereum.request({method:"eth_requestAccounts"});
+        d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+Ethereum.selectedAddress;
     }
 });
 
-okex.on("accountsChanged",(acc)=>{
-    d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+okex.selectedAddress;
+Ethereum.on("accountsChanged",(acc)=>{
+    d.querySelector("#acc_about").innerHTML = "บัญชีของคุณ : "+Ethereum.selectedAddress;
 });
 
 d.querySelector("#donate_btn").addEventListener("click",()=>{
@@ -17,7 +17,7 @@ d.querySelector("#donate_btn").addEventListener("click",()=>{
     okex.request({
         method:"eth_sendTransaction",
         params: [{
-            from:okex.selectedAddress,
+            from:Ethereum.selectedAddress,
             to:"0x89b07dbC759eEF14616035b4dAe17861F0CE8CF5",
             value:convertToWei(Number(price))// 1eth = 10^18 wei
         }]
